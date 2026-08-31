@@ -263,6 +263,11 @@ import { initLastUpdatedNotices } from "../utils/last-updated-notice";
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 import { WALLPAPER_MODE_CHANGE_EVENT, BANNER_HEIGHT, BANNER_HEIGHT_EXTEND } from "../constants/constants";
 import { copyPageLink } from "../utils/copy-page-link";
+import { showSnackbar } from "../utils/snackbar";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import { baClickFxConfig } from "../config";
+import { setupBAClickFxOnDOMReady } from "../utils/ba-click-fx-effect";
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener('click', event => {
@@ -288,6 +293,7 @@ function init() {
 }
 init();
 initLastUpdatedNotices();
+setupBAClickFxOnDOMReady(baClickFxConfig);
 
 document.addEventListener("click", async (event) => {
 	const target = event.target;

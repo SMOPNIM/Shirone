@@ -11,7 +11,7 @@ import {
 	WALLPAPER_MODE_KEY,
 } from "@constants/constants.ts";
 import { applyCurrentScheme } from "@utils/theme-utils";
-import { expressiveCodeConfig, siteConfig } from "@/config";
+import { baClickFxConfig, expressiveCodeConfig, siteConfig } from "@/config";
 import type { LIGHT_DARK_MODE, WallpaperMode } from "@/types/config";
 import type { TexturePreset } from "@/types/textureConfig";
 
@@ -184,4 +184,91 @@ export function applyMotionPreference(reduced: boolean): void {
 export function setMotionPreference(reduced: boolean): void {
 	localStorage.setItem(MOTION_KEY, reduced ? "reduced" : "full");
 	applyMotionPreference(reduced);
+}
+
+// ─── BA Click FX ─────────────────────────────────────────────
+
+const DEFAULT_BA_CLICK_FX_COLOR = "#47a6ff";
+
+function isValidHexColor(value: string): boolean {
+	return /^#[0-9a-fA-F]{6}$/.test(value);
+}
+
+export function getDefaultBaClickFxEnabled(): boolean {
+	return baClickFxConfig.enable ?? false;
+}
+
+export function getStoredBaClickFxEnabled(): boolean {
+	if (!(baClickFxConfig.switchable ?? true)) {
+		return getDefaultBaClickFxEnabled();
+	}
+	const stored = localStorage.getItem("baClickFxEnabled");
+	return stored !== null ? stored === "true" : getDefaultBaClickFxEnabled();
+}
+
+export function setBaClickFxEnabled(enabled: boolean): void {
+	localStorage.setItem("baClickFxEnabled", String(enabled));
+	window.dispatchEvent(
+		new CustomEvent("baclickfx-toggle", { detail: { enabled } }),
+	);
+}
+
+export function getDefaultBaClickFxColor(): string {
+	return isValidHexColor(baClickFxConfig.themeColor)
+		? baClickFxConfig.themeColor
+		: DEFAULT_BA_CLICK_FX_COLOR;
+}
+
+export function getStoredBaClickFxColor(): string {
+	const stored = localStorage.getItem("baClickFxColor");
+	return stored && isValidHexColor(stored)
+		? stored.toLowerCase()
+		: getDefaultBaClickFxColor();
+}
+
+export function setBaClickFxColor(color: string): void {
+	localStorage.setItem("baClickFxColor", color);
+	window.dispatchEvent(
+		new CustomEvent("baclickfx-color-change", { detail: { color } }),
+	);
+}
+
+/** HSL 转 six-digit hex，用于特效颜色滑块。滑块仅调色相，s/l 固定为 100%/64%。 */
+export function hslToHex(h: number, s = 100, l = 64): string {
+	const sn = s / 100;
+	const ln = l / 100;
+	const k = (n: number) => (n + h / 30) % 12;
+	const a = sn * Math.min(ln, 1 - ln);
+	const f = (n: number) =>
+		ln - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+	const to255 = (x: number) =>
+		Math.round(255 * x)
+			.toString(16)
+			.padStart(2, "0");
+	return `#${to255(f(0))}${to255(f(8))}${to255(f(4))}`;
+}
+
+/** 六位 hex 转色相角度（0~359），非法输入回退游戏蓝色相。 */
+export function hexToHue(hex: string): number {
+	const raw = hex.replace("#", "");
+	if (!/^[0-9a-fA-F]{6}$/.test(raw)) return 210;
+	const r = Number.parseInt(raw.slice(0, 2), 16) / 255;
+	const g = Number.parseInt(raw.slice(2, 4), 16) / 255;
+	const b = Number.parseInt(raw.slice(4, 6), 16) / 255;
+	const max = Math.max(r, g, b);
+	const min = Math.min(r, g, b);
+	if (max === min) return 0;
+	const d = max - min;
+	let hueDeg: number;
+	switch (max) {
+		case r:
+			hueDeg = (g - b) / d + (g < b ? 6 : 0);
+			break;
+		case g:
+			hueDeg = (b - r) / d + 2;
+			break;
+		default:
+			hueDeg = (r - g) / d + 4;
+	}
+	return Math.round(hueDeg * 60) % 360;
 }

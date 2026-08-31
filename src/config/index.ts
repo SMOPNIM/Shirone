@@ -7,6 +7,7 @@
  *   具体文件导入（`@/config/siteConfig`），禁止走本 barrel，避免循环依赖。
  */
 
+export { baClickFxConfig } from "./baClickFxConfig";
 export {
 	animeConfig,
 	resolveAnimeOptions,

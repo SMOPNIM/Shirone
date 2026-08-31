@@ -174,3 +174,14 @@ export type ExpressiveCodeConfig = {
 	lightTheme?: string;
 	darkTheme?: string;
 };
+
+export interface BAClickFxConfig {
+	enable: boolean;
+	switchable?: boolean;
+	themeColor: string;
+	scale: number;
+	opacity: number;
+	clickEnabled: boolean;
+	trailEnabled: boolean;
+	trailAlways: boolean;
+}

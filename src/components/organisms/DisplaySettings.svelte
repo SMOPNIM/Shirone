@@ -35,6 +35,14 @@ import {
 	setTextureOpacity,
 	setTexturePreset,
 	setWallpaperMode,
+	getDefaultBaClickFxEnabled,
+	getStoredBaClickFxEnabled,
+	setBaClickFxEnabled,
+	getDefaultBaClickFxColor,
+	getStoredBaClickFxColor,
+	setBaClickFxColor,
+	hslToHex,
+	hexToHue,
 } from "@utils/setting-utils";
 import { getSpec, getStyle, setSpec, setStyle } from "@utils/theme-utils";
 import { onMount } from "svelte";
@@ -43,6 +51,7 @@ import {
 	getDefaultStyle,
 	resolveDisplaySettings,
 	siteConfig,
+	baClickFxConfig,
 } from "@/config";
 import type { WallpaperMode } from "@/types/config";
 import type { PostListMode } from "@/types/postListConfig";
@@ -79,6 +88,30 @@ const defaultTextureOpacity = getDefaultTextureOpacity();
 let texturePreset = $state<TexturePreset>(getStoredTexturePreset());
 let lastAppliedTexturePreset = texturePreset;
 let textureOpacity = $state<number>(getStoredTextureOpacity());
+
+// BA Click FX
+const baClickFxAvailable = baClickFxConfig.enable && (baClickFxConfig.switchable ?? true);
+let baClickFxEnabled = $state(getDefaultBaClickFxEnabled());
+const initialBaClickFxColor = getStoredBaClickFxColor();
+let clickFxColor = $state(initialBaClickFxColor);
+let clickFxHue = $state(hexToHue(initialBaClickFxColor));
+
+function toggleBaClickFx() {
+	baClickFxEnabled = !baClickFxEnabled;
+	setBaClickFxEnabled(baClickFxEnabled);
+}
+
+function updateClickFxColor(hue: number) {
+	clickFxHue = hue;
+	clickFxColor = hslToHex(hue);
+	setBaClickFxColor(clickFxColor);
+}
+
+function resetClickFxColor() {
+	clickFxColor = getDefaultBaClickFxColor();
+	clickFxHue = hexToHue(clickFxColor);
+	setBaClickFxColor(clickFxColor);
+}
 
 const textureOptions: {
 	value: TexturePreset;
@@ -371,6 +404,43 @@ const stylePreviews = $derived(
                     <span class="text-sm font-bold text-[var(--on-surface)]">{i18n(I18nKey.reduceMotion)}</span>
                 </div>
                 <Switch bind:checked={motionReduced} label={i18n(I18nKey.reduceMotion)} icons />
+            </div>
+        {/if}
+
+        <!-- 段四：BA 点击特效 -->
+        {#if baClickFxAvailable}
+            <div class="p-4 flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <Icon icon="material-symbols:touch-app-rounded" class="text-lg text-[var(--primary)]" />
+                        <span class="text-sm font-bold text-[var(--on-surface)]">BA 点击特效</span>
+                    </div>
+                    <Switch bind:checked={baClickFxEnabled} label="BA 点击特效" icons onchange={toggleBaClickFx} />
+                </div>
+                {#if baClickFxEnabled}
+                    <div class="flex flex-col gap-2 pt-1">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-(--on-surface-variant)">主题色</span>
+                            <span class="text-xs text-(--btn-content) uppercase">{clickFxColor}</span>
+                        </div>
+                        <button
+                            class="text-xs text-(--primary) opacity-70 hover:opacity-100 transition"
+                            class:opacity-0={clickFxColor === getDefaultBaClickFxColor()}
+                            class:pointer-events-none={clickFxColor === getDefaultBaClickFxColor()}
+                            onclick={resetClickFxColor}
+                        >
+                            重置为默认
+                        </button>
+                        <Slider
+                            value={clickFxHue}
+                            min={0}
+                            max={360}
+                            step={5}
+                            label="BA 特效色相"
+                            oninput={(e) => updateClickFxColor(Number(e.currentTarget.value))}
+                        />
+                    </div>
+                {/if}
             </div>
         {/if}
     </PanelStack>
