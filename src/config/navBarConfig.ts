@@ -108,10 +108,17 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	},
 	GitHub: {
 		name: "GitHub",
-		url: "https://github.com/LyraVoid/Shirone",
+		url: "https://github.com/SMOPNIM",
 		icon: "fa6-brands:github",
 		external: true,
 		pageKey: "github",
+	},
+	Bilibili: {
+		name: "Bilibili",
+		url: "https://space.bilibili.com/699607320",
+		icon: "fa6-brands:bilibili",
+		external: true,
+		pageKey: "bilibili",
 	},
 };
 
@@ -119,25 +126,40 @@ const defaultNavBarConfig: NavBarConfig = {
 	links: [
 		LinkPresets.Home,
 		LinkPresets.Archive,
-		LinkPresets.Friends,
-		LinkPresets.Moments,
-		LinkPresets.Anime,
-		LinkPresets.Compass,
-		LinkPresets.Albums,
 		{
-			name: i18n(I18nKey.more),
+			name: "Links",
+			icon: "material-symbols:link-rounded",
+			children: [
+				LinkPresets.GitHub,
+				LinkPresets.Bilibili,
+			],
+		},
+		{
+			name: "My",
+			icon: "material-symbols:person-rounded",
+			children: [
+				LinkPresets.Anime,
+				LinkPresets.Albums,
+				...(devicesConfig.enable ? [LinkPresets.Devices] : []),
+			],
+		},
+		{
+			name: "About",
+			icon: "material-symbols:info-outline-rounded",
+			children: [
+				LinkPresets.About,
+				LinkPresets.Friends,
+			],
+		},
+		{
+			name: "Others",
 			icon: "material-symbols:apps-rounded",
 			children: [
-				...(timelineConfig.enable ? [LinkPresets.Timeline] : []),
 				...(projectsConfig.enable ? [LinkPresets.Projects] : []),
-				...(devicesConfig.enable ? [LinkPresets.Devices] : []),
 				...(skillsConfig.enable ? [LinkPresets.Skills] : []),
-				// 分类/标签入口不进导航菜单（避免菜单项过多），预设已登记指向独立页面，
-				// 需要时取消注释即可
-				// LinkPresets.Categories,
-				// LinkPresets.Tags,
-				LinkPresets.About,
-				LinkPresets.GitHub,
+				...(timelineConfig.enable ? [LinkPresets.Timeline] : []),
+				LinkPresets.Categories,
+				LinkPresets.Tags,
 			],
 		},
 	],

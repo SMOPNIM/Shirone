@@ -10,10 +10,10 @@ import { withUserConfig } from "../utils/config-overlay.ts";
  * 类型见 src/types/config.ts。
  */
 export const siteConfig: SiteConfig = withUserConfig("site", {
-	site: "https://shirone.mysqil.com/",
+	site: "https://blog.smopnim.de5.net/",
 	base: "/",
-	title: "Shirone",
-	subtitle: "A Material 3 anime blog",
+	title: "SMOPNIM's Blog",
+	subtitle: "Welcome!",
 	// 电脑端顶栏标题与导航内容区域："left" 左对齐，"center" 居中。
 	topAppBar: {
 		contentAlign: "center",
@@ -27,11 +27,11 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		reduceMotion: true, // 是否展示减少动效切换
 		texture: true, // 是否展示背景纹理选择
 	},
-	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
+	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	// IANA time zone for precise post and moment timestamps. It is independent of lang.
 	timeZone: "Asia/Shanghai",
 	themeColor: {
-		hue: 315, // Default hue 0-360. 站点设计默认粉紫（偏二次元）；262 紫 / 345 粉 也可选
+		hue: 240, // Default hue 0-360. 站点设计默认蓝紫；262 紫 / 345 粉 也可选
 		fixed: false, // Hide the theme color picker for visitors
 		// Dynamic Material 3 palette style (TonalSpot/Vibrant/Content/Expressive/Rainbow/FruitSalad/Monochrome/Neutral/Fidelity)
 		style: "tonalSpot",
@@ -57,8 +57,37 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		// desktop 用于 >= 1024px；mobile 仅用于 < 1024px 的首页，手机非首页不显示壁纸。
 		// 数组顺序就是轮播顺序；只需要静态 Banner 时，每组保留一张图片即可。
 		src: {
-			desktop: ["assets/images/banner/desktop/1.webp"],
-			mobile: ["assets/images/banner/mobile/1.webp"],
+			desktop: [
+				"/images/desktop-banner/1.webp",
+				"/images/desktop-banner/2.webp",
+				"/images/desktop-banner/3.webp",
+				"/images/desktop-banner/4.webp",
+				"/images/desktop-banner/5.webp",
+				"/images/desktop-banner/6.webp",
+				"/images/desktop-banner/8.webp",
+				"/images/desktop-banner/9.webp",
+				"/images/desktop-banner/10.webp",
+				"/images/desktop-banner/11.webp",
+				"/images/desktop-banner/12.webp",
+				"/images/desktop-banner/13.webp",
+				"/images/desktop-banner/14.webp",
+				"/images/desktop-banner/15.webp",
+			],
+			mobile: [
+				"/images/mobile-banner/1.webp",
+				"/images/mobile-banner/2.webp",
+				"/images/mobile-banner/3.webp",
+				"/images/mobile-banner/4.webp",
+				"/images/mobile-banner/5.webp",
+				"/images/mobile-banner/6.webp",
+				"/images/mobile-banner/8.webp",
+				"/images/mobile-banner/9.webp",
+				"/images/mobile-banner/10.webp",
+				"/images/mobile-banner/11.webp",
+				"/images/mobile-banner/12.webp",
+				"/images/mobile-banner/13.webp",
+				"/images/mobile-banner/14.webp",
+			],
 		},
 		// 图片裁切焦点："top"、"center" 或 "bottom"。
 		position: "center",
@@ -70,13 +99,33 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		homeText: {
 			// 仅在首页 Banner 中显示，标题与副标题会上下居中排列。
 			enable: true,
-			title: "Shirone",
+			title: "我的博客",
 			subtitle: [
-				"特別なことはないけど、君がいると十分です",
-				"今でもあなたは私の光",
-				"君ってさ、知らないうちに私の毎日になってたよ",
-				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
-				"今日はなんでもない日。でも、ちょっとだけいい日",
+				// ↓微软式中文
+				"头抬起，请坐和放宽。",
+				"海内存知己，天涯若比邻。",
+				"做 轰！嚓-嚓-嚓 推-推 的事",
+				"您可能是正版受害者。",
+				"让我们重回正轨。",
+				"请勿™关闭计算机",
+				"将微软边缘停靠在您的码头上",
+				"你今天看起来很聪明！",
+				"您正在成功！",
+				"用微软边缘粉碎你的工作日！",
+				// ↓经典测试语句
+				"The quick brown fox jumps over the lazy dog",
+				// ↓苹果式中文
+				"开发者的大事，大快所有人心的大好事！",
+				"让妈妈开心的礼物，开了又开。",
+				"比更大还更大", //By @ClaraHerta-Offical
+				"你的下一台电脑，何必是电脑。",
+				"iPhone 12 —— 专治水逆。",
+				"别看轻，别轻看。",
+				"真的笑，笑出声。",
+				"全新iPhone现已问世，全新iPhone也已问世。",
+				"听君一席话，如听一席话。",
+				// ↓其他
+				"We are heading east.", //By @ClaraHerta-Offical
 			],
 			typewriter: {
 				// 副标题逐字显示；关闭后直接显示完整副标题。
@@ -95,7 +144,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 			// 是否开启多张图片自动轮播；多张图片时生效，单张图片时自动降级为静态展示。
 			enable: true,
 			// 轮播切换间隔时间（毫秒），运行时最小值限制为 3000ms。
-			interval: 6000,
+			interval: 3000,
 			// 交叉淡入淡出（Crossfade）过渡时长（毫秒，默认 1200ms）。
 			fadeDuration: 1200,
 			// 运镜呼吸动画模式："ken-burns"（默认，循环运镜）| "zoom-in"（推进）| "zoom-out"（拉远）| "pan-left"（左移）| "pan-right"（右移）| "none"（无运镜）。
@@ -113,7 +162,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
-		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
+		depth: 3, // Maximum heading depth to show in the table, from 1 to 3
 	},
 	progressIndicator: {
 		// 进度条预设样式：dual 双向扫描（官方默认双线）/ single 单向扫描（单线）
@@ -121,11 +170,9 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	},
 	favicon: [
 		// Leave this array empty to use the default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Only if you have favicons of different sizes
-		// }
+		{
+			src: "/images/avatar.webp",
+		},
 	],
 });
 

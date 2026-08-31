@@ -25,6 +25,11 @@ export const skillsConfig: SkillsConfig = withUserConfig("skills", {
 			icon: "material-symbols:dns-rounded",
 		},
 		{
+			key: "database",
+			label: "Database",
+			icon: "material-symbols:database-rounded",
+		},
+		{
 			key: "tooling",
 			label: "Tooling",
 			icon: "material-symbols:construction-rounded",
