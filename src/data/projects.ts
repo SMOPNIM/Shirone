@@ -5,42 +5,61 @@
 import type { ProjectItem } from "@/types/projectsConfig";
 
 export const projectsData: ProjectItem[] = [
-	{
-		key: "shirone",
-		title: "Shirone",
-		summary:
-			"An Astro blog theme shaped around an M3E component system, expressive content, and resilient client navigation.",
-		category: "theme",
-		phase: "building",
-		technologies: ["Astro", "Svelte", "TypeScript", "Tailwind CSS"],
-		icon: "material-symbols:deployed-code-outline-rounded",
-		cover: "/assets/projects/shirone.webp",
-		coverAlt: "Shirone theme homepage preview",
-		featured: true,
-		repository: "https://github.com/LyraVoid/Shirone",
-		year: "2026",
-	},
-	{
-		key: "folkpatch",
-		title: "FolkPatch",
-		summary: "A kernel-level root solution for Android, built on APatch.",
-		category: "android",
-		phase: "building",
-		technologies: ["Kotlin", "APatch", "Android"],
-		icon: "material-symbols:terminal-rounded",
-		repository: "https://github.com/LyraVoid/FolkPatch",
-	},
-	{
-		key: "kernelpatch",
-		title: "KernelPatch",
-		summary:
-			"A kernel patch framework that powers APatch-style root on Android by loading code into the running kernel.",
-		category: "android",
-		phase: "shipped",
-		technologies: ["C", "Linux Kernel", "Android"],
-		icon: "material-symbols:extension-outline-rounded",
-		repository: "https://github.com/lyravoid/KernelPatch",
-	},
+	// {
+	// 	key: "mizuki",
+	// 	title: "Mizuki",
+	// 	summary:
+	// 		"A next-gen Material Design 3 blog theme built with Astro, featuring i18n, dark mode, and responsive design.",
+	// 	category: "web",
+	// 	technologies: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
+	// 	phase: "shipped",
+	// 	repository: "https://github.com/LyraVoid/Mizuki",
+	// 	website: "https://mizuki.mysqil.com",
+	// 	featured: true,
+	// },
+	// {
+	// 	key: "folkpatch",
+	// 	title: "FolkPatch",
+	// 	summary:
+	// 		"A kernel-level ROOT solution based on KernelPatch, with polished UI, APM module system, and KPM kernel module support.",
+	// 	category: "mobile",
+	// 	technologies: ["Kotlin", "Rust", "C++", "Java"],
+	// 	phase: "building",
+	// 	repository: "https://github.com/LyraVoid/FolkPatch",
+	// 	website: "https://fp.mysqil.com",
+	// 	featured: true,
+	// },
+	// {
+	// 	key: "folktool",
+	// 	title: "FolkTool",
+	// 	summary:
+	// 		"A fast ROOT flashing tool for FolkPatch with a graphical interface and automated operations, simplifying the complex flashing process.",
+	// 	category: "desktop",
+	// 	technologies: ["Flutter", "Dart", "C++", "CMake"],
+	// 	phase: "shipped",
+	// 	repository: "https://github.com/LyraVoid/FolkTool",
+	// },
+	// {
+	// 	key: "folkadb",
+	// 	title: "FolkADB",
+	// 	summary:
+	// 		"A portable ADB/Fastboot tool written in C, featuring interactive CLI, Tab completion, drag-and-drop module installation, and Shizuku activation.",
+	// 	category: "desktop",
+	// 	technologies: ["C"],
+	// 	phase: "shipped",
+	// 	repository: "https://github.com/LyraVoid/FolkADB",
+	// },
+	// {
+	// 	key: "folksplash",
+	// 	title: "FolkSplash",
+	// 	summary:
+	// 		"A web-based splash.img visualizer for OPPO/Realme/OnePlus devices, supporting unpack, preview, replace, and repack.",
+	// 	category: "web",
+	// 	technologies: ["React", "TypeScript", "Vite", "Material-UI", "Zustand"],
+	// 	phase: "shipped",
+	// 	repository: "https://github.com/LyraVoid/FolkSplash",
+	// 	website: "https://splash.mysqil.com",
+	// },
 ];
 
 /** 获取所有项目数据列表 */
