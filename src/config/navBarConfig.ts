@@ -3,7 +3,6 @@ import { i18n } from "@i18n/translation";
 import { devicesConfig } from "@/config/devicesConfig";
 import { projectsConfig } from "@/config/projectsConfig";
 import { skillsConfig } from "@/config/skillsConfig";
-import { timelineConfig } from "@/config/timelineConfig";
 import type {
 	NavBarConfig,
 	NavBarConfigOverride,
@@ -138,8 +137,8 @@ const defaultNavBarConfig: NavBarConfig = {
 			name: "My",
 			icon: "material-symbols:person-rounded",
 			children: [
-				LinkPresets.Anime,
-				LinkPresets.Albums,
+				// LinkPresets.Anime,
+				// LinkPresets.Albums,
 				...(devicesConfig.enable ? [LinkPresets.Devices] : []),
 			],
 		},
@@ -157,7 +156,7 @@ const defaultNavBarConfig: NavBarConfig = {
 			children: [
 				...(projectsConfig.enable ? [LinkPresets.Projects] : []),
 				...(skillsConfig.enable ? [LinkPresets.Skills] : []),
-				...(timelineConfig.enable ? [LinkPresets.Timeline] : []),
+				// ...(timelineConfig.enable ? [LinkPresets.Timeline] : []),
 				LinkPresets.Categories,
 				LinkPresets.Tags,
 			],
